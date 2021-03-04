@@ -1,31 +1,15 @@
-const HomePage = {
-    render() {
-        return `<h1>Home Page of ThanhNV</h1>`
-    }
-}
-export default HomePage;
+// import data from '../data.js';
+// import axios from 'axios';
+import ProductAPI from '../api/productAPI';
+import { parseRequesUrl } from '../utils.js';
 
-
-
-import ProductApi from '../api/productAPI.js';
-import { parseRequestUrl } from './utils.js';
-import data from './../data.js';
-const productDetail = {
+const ProductDetail = {
     async render() {
-        const { id } = parseRequestUrl();
-        //   const { data :product} = await ProductApi.get (id);
-        const product = data.products.find(product => product.id === id);
+
+        const { id } = parseRequesUrl();
+        const { data: product } = await ProductAPI.get(id);
         return `
-       <div class="breadcrumb-wrap">
-        <div class="container-fluid">
-            <ul class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/#/">Home</a></li>
-                <li class="breadcrumb-item"><a href="/#/products">Products</a></li>
-                <li class="breadcrumb-item active">Product Detail</li>
-            </ul>
-        </div>
-    </div>
-    <div class="product-detail">
+        <div class="product-detail">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-8">
@@ -94,9 +78,15 @@ const productDetail = {
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+        </div>
 
-
-          `
+        `
     }
 }
-export default productDetail;
+export default ProductDetail;
+
+
+

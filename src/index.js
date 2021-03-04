@@ -1,29 +1,39 @@
-import HomePage from './pages/HomePage.js';
-import ProductsDetail from './pages/ProductsDetail.js';
-import ProductsPage from './pages/ProductsPage.js';
-import { parsRequesUrl, $ } from './utils.js';
-import Error404Page from './pages/Error404Page.js';
-import CategoryPage from './pages/CategoryPage.js';
-import Header from './componemts/Header.js';
-import ProductAddPage from './pages/ProductAddPage.js';
+import HomePage from './page/HomePage.js';
+import ProductDetail from './page/ProductDetail.js';
+import ProductPage from './page/ProductPage.js';
+import { parseRequesUrl, $ } from './utils.js';
+import Header from './components/Header.js';
+import CategoryPage from './page/CategoryPage.js';
+import ProductAddPage from './page/ProductAddPage.js';
+import AdminProductPage from './page/AdminProductPage.js';
+import ContactPage from './page/ContactPage.js';
+import AboutPage from './page/AboutPage.js';
+import ProductEditPage from './page/ProductEditPage.js';
 
 
-const routes = {
+
+const routers = {
     '/': HomePage,
-    '/products': ProductsPage,
-    '/products/:id': ProductsDetail,
+    '/products': ProductPage,
+    '/products/:id': ProductDetail,
     '/category/:id': CategoryPage,
-    '/addproduct/': ProductAddPage
+    '/addproduct': ProductAddPage,
+    '/listproduct': AdminProductPage,
+    '/contact': ContactPage,
+    '/about': AboutPage,
+    '/editsproduct/:id': ProductEditPage
+
+
+
 }
 const router = async () => {
-    const { resource, id } = parsRequesUrl();
+    const { resource, id } = parseRequesUrl();
     const parseUrl = (resource ? `/${resource}` : '/') + (id ? `/:id` : '')
-    const page = routes[parseUrl] ? routes[parseUrl] : Error404Page;
+    const page = routers[parseUrl] ? routers[parseUrl] : Error404Page;
     $('#header').innerHTML = await Header.render();
     $('#main-content').innerHTML = await page.render();
     await page.afterRender();
 }
-
 
 window.addEventListener('DOMContentLoaded', router);
 window.addEventListener('hashchange', router);

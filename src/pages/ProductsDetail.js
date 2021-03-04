@@ -11,13 +11,16 @@ const ProductDetail = {
         return `
                 <div class="row">
                     <div class="col-6">
-                        <img src="${product.image}"/>
+                        <img width="200" src="${product.image}"/>
                     </div>
                     <div class="col-6">
                         <h1>${product.name}</h1>
+                        <p>${product.price}</p>
+                        <p>${product.description}</p>
                     </div>
                 </div>
         `
     }
 }
 export default ProductDetail;
+

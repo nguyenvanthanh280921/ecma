@@ -6,16 +6,16 @@ const CategoryAPI = {
         return axiosClient.get(url);
     },
     get(id) {
-        const url = `/category/${id}`;
+        const url = `/categorys/${id}`;
         return axiosClient.get(url);
     },
     add() {
 
     },
-    remove(id) {
+    remove() {
 
     },
-    update(id) {
+    upload() {
 
     }
 }

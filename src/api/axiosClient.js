@@ -1,9 +1,9 @@
 import axios from 'axios';
 
 export const axiosClient = axios.create({
-    // baseURL: 'http://localhost:3000/products',
+    // baseURL: 'https://5e79b4b817314d00161333da.mockapi.io',
     baseURL: 'http://localhost:3000',
     headers: {
-        'Content-Type': 'applivation',
+        'Content-Type': 'application/json',
     },
 });

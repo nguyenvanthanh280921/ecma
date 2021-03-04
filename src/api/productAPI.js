@@ -14,9 +14,10 @@ const ProductAPI = {
         return axiosClient.post(url, product);
     },
     remove(id) {
-
+        const url = `/products/${id}`;
+        return axiosClient.delete(url);
     },
-    update(id) {
+    upload() {
 
     }
 }

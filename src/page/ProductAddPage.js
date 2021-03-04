@@ -1,6 +1,6 @@
-import ProductApi from '../api/productAPI.js';
-import { $ } from '../pages/utils.js';
-import firebase from '../firebase'
+import ProductAPI from '../api/productAPI.js';
+import { $ } from '../utils.js';
+
 const ProductAddPage = {
     render() {
         return /*html*/`
@@ -23,54 +23,45 @@ const ProductAddPage = {
             </div>
 
             <div class="form-group">
-                <input type="submit" class="btn btn-primary submitForm" value="Add Product" />
+                <input href="/#/listproduct"  type="submit" class="btn btn-primary submitForm" value="Add Product" />
             </div>
         </form>`
-
     },
-    // afterRender(){
-    //     $('.submitForm').addEventListener('click', async(e) =>{
-    //         e.preventDefault();
-
     async afterRender() {
         $('#form-add').addEventListener('submit', e => {
             e.preventDefault();
 
             const productImage = $('#product-image').files[0];
-            console.log(productImage)
-            let storageRef = firebase.storage().ref(image / productImage.name);
+            let storageRef = firebase.storage().ref(`images/${productImage.name}`);
             storageRef.put(productImage).then(function () {
-                console.log('Upload Thành Công')
-
-                storageRef.getDownloadURL().then((url) => {
+                console.log('Upload thành công')
+                storageRef.getDownLoadURL().then((url) => {
                     const product = {
                         id: Math.random().toString(36).substr(2, 9),
                         name: $('#product-name').value,
-                        price: $('#product-price').value,
-                        description: $('#product-description').value,
-                        categoryId: $('#product-categoryId').value,
                         image: url
-
                     };
-                    ProductApi.add(product);
 
+                    console.log(product);
+                    ProductAPI.add(product);
                 })
             })
+            // const product = {
+            //     id: Math.random().toString(36).substr(2, 9),
+            //     name: $('#product-name').value,
+            //     image: $('#product-image').value,
+            //     price: $('#product-price').value,
+            //     description: $('#product-description').value,
+            //     categoryId: $('#product-categoryId').value,
+
+            // }
+
         })
     }
 }
-
-//           const product ={
-//               name: $('#product-name').value
-//               , price: $('#product-price').value,
-//               description: $('#product-description').value
-//           }
-//           const res = await ProductApi.add(product);
-//           console.log(res);
-
-//         })
-
-//     }
-
-// }
 export default ProductAddPage;
+
+
+
+
+
